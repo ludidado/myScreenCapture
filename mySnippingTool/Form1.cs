@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace mySnippingTool
+namespace myScrenCapture
 {
     public partial class Form1 : Form
     {
@@ -24,7 +24,10 @@ namespace mySnippingTool
         int selectWidth;
         int selectHeight;
         public Pen selectPen;
-
+        private mySoundPlayer myOpensoundplayer;
+        private mySoundPlayer myCopysoundplayer;
+        string OpenSound = "Sounds/BWah.wav";
+        string CopySound = "Sounds/Td.wav";
         //This variable control when you start the right click
         bool start = false;
 
@@ -37,7 +40,11 @@ namespace mySnippingTool
             hook.KeyPressed +=
                 new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
             // register the control + alt + F12 combination as hot key.
-            hook.RegisterHotKey(mySnippingTool.ModifierKeys.Control,  Keys.F12); //  | mySnippingTool.ModifierKeys.Alt,
+            hook.RegisterHotKey(myScrenCapture.ModifierKeys.Control,  Keys.F12); //  | mySnippingTool.ModifierKeys.Alt,
+            myOpensoundplayer = new mySoundPlayer(OpenSound);
+            myCopysoundplayer = new mySoundPlayer(CopySound);
+            
+
         }
 
         void hook_KeyPressed(object sender, KeyPressedEventArgs e)
@@ -90,6 +97,8 @@ namespace mySnippingTool
         {
             //Hide Form
             this.Hide();
+            // Play I'M HERE Sound
+            myOpensoundplayer.PlayOnce();
 
         }
 
@@ -211,8 +220,16 @@ namespace mySnippingTool
                 start = false;
                 //function save image to clipboard
                 SaveToClipboard();
+                myCopysoundplayer.PlayOnce();
             }
         }
+
+        private void pbScreenShot_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            myOpensoundplayer.PlayOnce();
+        }
+
+
     }
 
 

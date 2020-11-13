@@ -1,4 +1,4 @@
-﻿namespace mySnippingTool
+﻿namespace myScrenCapture
 {
     partial class Form1
     {
@@ -53,6 +53,7 @@
             this.pbScreenShot.Size = new System.Drawing.Size(800, 450);
             this.pbScreenShot.TabIndex = 1;
             this.pbScreenShot.TabStop = false;
+            this.pbScreenShot.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.pbScreenShot_LoadCompleted);
             this.pbScreenShot.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbScreenShot_MouseDown);
             this.pbScreenShot.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbScreenShot_MouseMove);
             this.pbScreenShot.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
